@@ -29,10 +29,11 @@ form.addEventListener('submit', (e) => {
             // console.error(error);
         })
         .finally(() => {
-            form.reset();
-            window.location.replace("/")
+            // form.reset();
             setTimeout(() => {
+                window.location.replace("../reg.php")
                 statusMessage.remove();
-            }, 6000);
+            }, 1000);
         });
+
 });
