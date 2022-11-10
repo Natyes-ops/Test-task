@@ -1,5 +1,10 @@
 <?php 
-    $user = $_COOKIE['user'];
+    session_start();
+    if (!isset($_SESSION['user'])) {
+        header('Location: /');
+    } else {
+        $user = $_COOKIE['user'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
