@@ -1,6 +1,12 @@
 const login = document.querySelector('#loginin'),
     statusMessage = document.createElement('div');
 
+const message = {
+    loading: 'Загрузка...',
+    success: 'Пользователь успешно зарегистрирован',
+    error: 'Возникла ошибка...'
+};
+
 // Login
 login.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -16,14 +22,14 @@ login.addEventListener('submit', (e) => {
             statusMessage.textContent = message.success;
         })
         .catch((error) => {
-            statusMessage.textContent = message.error;
-            console.error(error);
+            // statusMessage.textContent = message.error;
+            // console.error(error);
         })
         .finally(() => {
-            login.reset();
-            window.location.replace("/user.php")
+            // login.reset();
             setTimeout(() => {
+                window.location.replace("../user.php")
                 statusMessage.remove();
-            }, 6000);
+            }, 1000);
         });
 });
