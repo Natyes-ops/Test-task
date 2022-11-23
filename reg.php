@@ -40,7 +40,7 @@ if (isset($_SESSION['user'])) {
             </label>
             <label for="email" class="form-item">
                 Почта:
-                <input type="email" name="email"  placeholder="Введите почту" class="form-item__input" title="Введите в формате test@test.ru" pattern="^\S[a-z0-9]+@[a-z0-9]+\.[a-z]{1,}\S+$" required>
+                <input type="email" name="email"  placeholder="Введите почту" class="form-item__input" title="Введите в формате test@test.ru, без пробелов" pattern="^(?=[^\s])(^\S[a-z0-9]+@[a-z0-9]+\.[a-z]{1,}\S+$)" required>
             </label>
             <button class="btn" type="submit">Зарегистрироваться</button>
             <a href="/">Авторизация</a>
