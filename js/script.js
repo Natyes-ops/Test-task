@@ -17,3 +17,12 @@ const getData = async (url) => {
     }
     return await res.json();
 }
+// Validate JSON
+const validateJson = (json) => {
+    try {
+        JSON.parse(json);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
