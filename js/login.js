@@ -4,34 +4,34 @@ const login = document.querySelector('#loginin'),
 const message = {
     loading: 'Загрузка...',
     success: 'Пользователь успешно зарегистрирован',
-    error: 'Возникла ошибка...',
-    errorJson: 'Ошибка в JSON',
+    error: 'Возникла ошибка...'
 };
+statusMessage.classList.add('status');
 
-// Login
 login.addEventListener('submit', (e) => {
     e.preventDefault();
     login.appendChild(statusMessage);
+
     const formData = new FormData(login),
         json = JSON.stringify(Object.fromEntries(formData.entries()));
         postData('../app/loginin.php', json)
             .then((response) => {
-                if (response.status !== 200) {
-                    throw new Error('status network not 200')
+                if (response.status == 200) {
+                    statusMessage.style.color = 'green';
+                    statusMessage.textContent = response.success;
                 } else if (validateJson(response)) {
                     throw new Error(message.errorJson)
+                } else if (response.type == 'error') {
+                    statusMessage.textContent = response.error;
+                } else {
+                    throw new Error('status network not 200')
                 }
-                statusMessage.textContent = message.success;
-            })
-            .catch((error) => {
-                // statusMessage.textContent = message.error;
-                // console.error(error);
             })
             .finally(() => {
                 // login.reset();
                 setTimeout(() => {
                     window.location.replace("../user.php")
                     statusMessage.remove();
-                }, 1000);
+                }, 2000);
             });
 });
