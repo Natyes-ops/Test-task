@@ -38,7 +38,6 @@ form.addEventListener('submit', (e) => {
             setTimeout(() => {
                 window.location.replace("../reg.php")
                 statusMessage.remove();
-            }, 100000);
+            }, 2000);
         });
-
 });
