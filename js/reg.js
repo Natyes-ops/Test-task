@@ -18,22 +18,27 @@ form.addEventListener('submit', (e) => {
 
     postData('../app/registration.php', json)
         .then((response) => {
-            if (response.status !== 200) {
+            if (response.status == 200) {
+                statusMessage.style.color = 'green';
+                statusMessage.textContent = message.success;
+            } else if (validateJson(response)) {
+                throw new Error(message.errorJson)
+            } else if (response.type == 'login') {
+                statusMessage.textContent = response.error;
+            } else if (response.type == 'email') {
+                statusMessage.textContent = response.error;
+            } else if (response.type == 'password') {
+                statusMessage.textContent = response.error;
+            } else {
                 throw new Error('status network not 200')
             }
-            console.log(json);
-            statusMessage.textContent = message.success;
-        })
-        .catch((error) => {
-            // statusMessage.textContent = message.error;
-            // console.error(error);
         })
         .finally(() => {
             // form.reset();
             setTimeout(() => {
                 window.location.replace("../reg.php")
                 statusMessage.remove();
-            }, 1000);
+            }, 100000);
         });
 
 });

@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 include_once './user.php';
 include_once './crud.php';
 include_once './validate.php';
@@ -10,18 +13,19 @@ if (isset($_POST['name']) && isset($_POST['login']) && isset($_POST['password'])
         $user = new User($_POST['name'], $_POST['login'], $_POST['password'], $_POST['email']);
         $check = checkUser($user);
         if ($check === 'login') {
-            echo 'Логин уже существует';
+            echo json_encode(['error' => 'Логин уже существует', 'type' => 'login']);
             return;
         } else if ($check === 'email') {
-            echo 'Почта уже зарегистрирована';
+            echo json_encode(['error' => 'Почта уже зарегистрирована', 'type' => 'email']);
             return;
         } else {
             session_start();
             $_SESSION['user'] = $user->getData('login');
             setcookie('user', $user->login, time() + 3600, '/');
             $crud->create($user);
+            echo json_encode(['success' => 'Регистрация прошла успешно','status' => '200']);
         }
     } else {
-        echo 'Пароли не совпадают';
+        echo json_encode(['error' => 'Пароли не совпадают', 'type' => 'password']);
     }
 }
