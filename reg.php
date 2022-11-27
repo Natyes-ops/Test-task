@@ -32,11 +32,11 @@ if (isset($_SESSION['user'])) {
             </label>
             <label for="password" class="form-item">
                 Пароль:
-                <input type="password" name="password" placeholder="Введите пароль" class="form-item__input" title="минимум 6 символов без пробелов, обязательно должны быть цифры, буквы и минимум 2 спец. символа !@#$&*" pattern="^(?=[^\s]{6,}.*[!@#$&*])(^\S(?=.*\d)(?=.*[!@#$&*])(?=.*[a-z])\S+$)" required>
+                <input type="password" name="password" placeholder="Введите пароль" class="form-item__input" title="минимум 6 символов без пробелов и спец. символов, обязательно должны быть цифры" pattern="^(\S(?=.*[a-zA-Z0-9])\S)+$" required>
             </label>
             <label for="password-check" class="form-item">
                 Повторите пароль:
-                <input type="password" name="password-check" placeholder="Введите пароль" class="form-item__input" title="минимум 6 символов, обязательно должны быть цифры и буквы" pattern="(?=.*\d)(?=.*[a-z]).{6,}" required>
+                <input type="password" name="password-check" placeholder="Введите пароль" class="form-item__input" title="минимум 6 символов, обязательно должны быть цифры и буквы" pattern="^(\S(?=.*[a-zA-Z0-9])\S)+$" required>
             </label>
             <label for="email" class="form-item">
                 Почта:
